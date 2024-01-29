@@ -32,3 +32,21 @@ Route::prefix('/course')->group(
         Route::post('/join/{id}',[EnrollmentCourseController::class,'joinCourse']);
     }
 );
+
+Route::prefix('/lesson')->group(
+    function()
+    {
+        Route::get('/{id}',[LessonController::class,'show']);
+        Route::put('/update/{id}',[LessonController::class,'update']);
+        Route::post('/delete/{id}',[LessonController::class,'delete']);
+    }
+);
+
+Route::prefix('enrollment')->group(
+    function()
+    {
+        Route::post('/remove/{id}',[EnrollmentCourseController::class,'removeCourse']);
+        Route::post('/restore/{id}',[EnrollmentCourseController::class,'restoreCourse']);
+        Route::post('/goal/{id}',[EnrollmentCourseController::class,'setGoal']);
+    }
+);

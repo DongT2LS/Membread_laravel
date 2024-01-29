@@ -21,13 +21,14 @@ class Course extends Model
         'lessons',
         'author',
         'type',
-        'leader_board'
+        'leader_board',
+        'attr'
     ];
 
     public $timestamps = true;
 
     public function lessons()
     {
-        return $this->hasMany(Lesson::class,'coursssss_id');
+        return $this->embedsMany(Lesson::class,'lessons');
     }
 }
