@@ -4,7 +4,10 @@ namespace App\Services;
 
 use App\DTOs\CourseDTO;
 use App\Models\Course;
-
+/**
+ * CourseInfoService
+ * Declare some function for CourseInfoController
+ */
 class CourseInfoService
 {
     public function store(CourseDTO $courseDTO)
@@ -16,7 +19,6 @@ class CourseInfoService
         $course->author = $courseDTO->author;
         $course->save();
     }
-
     public function update(CourseDTO $courseDTO){
         $course = Course::find($courseDTO->id);
 
@@ -26,10 +28,10 @@ class CourseInfoService
         $courseDTO->type && $courseUpdate['type'] = $courseDTO->type;
         $course->update($courseUpdate);
     }
-
-    public function show($id) : Course
+    public function show($id) : CourseDTO
     {
-        return Course::find($id);
-
+        $course = Course::find($id);
+        $courseDTO = CourseDTO::createCourseDTO($course);
+        return $courseDTO;
     }
 }

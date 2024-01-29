@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
 use Jenssegers\Mongodb\Eloquent\HybridRelations;
+use Jenssegers\Mongodb\Relations\HasMany;
+
 
 class Course extends Model
 {
@@ -23,4 +25,9 @@ class Course extends Model
     ];
 
     public $timestamps = true;
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class,'coursssss_id');
+    }
 }

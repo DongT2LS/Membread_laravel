@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\DTOs\CourseDTO;
 use App\Services\CourseInfoService;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+
+/*
+    CourseInfoController
+*/
 
 class CourseInfoController extends Controller
 {
@@ -13,11 +18,6 @@ class CourseInfoController extends Controller
     public function __construct(CourseInfoService $courseInfoService) {
         $this->courseInfoService = $courseInfoService;
     }
-    public function index()
-    {
-
-    }
-
     public function store(Request $request)
     {
         $course = new CourseDTO;
@@ -25,10 +25,11 @@ class CourseInfoController extends Controller
         $course->description = $request->description;
         $course->type = $request->type;
         $course->author = $request->author;
-
+        
         $this->courseInfoService->store($course);
-    }
 
+        return Response(['message'=>'success'],200);
+    }
     public function update(Request $request)
     {
         $course = new CourseDTO;
@@ -40,9 +41,9 @@ class CourseInfoController extends Controller
 
         $course = $this->courseInfoService->update($course);
     }
-
     public function show($id)
     {
-        $this->courseInfoService->show($id);
+        $course = $this->courseInfoService->show($id);
+        return Response(json_encode($course),200);
     }
 }

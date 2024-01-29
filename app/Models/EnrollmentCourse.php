@@ -11,8 +11,6 @@ class EnrollmentCourse extends Model
 {
     use HasFactory,HybridRelations,SoftDeletes;
     protected $connection = 'mongodb';
-    protected $collection = 'enrollmentcourses';
-
     protected $fillable = [
         'title',
         'description',

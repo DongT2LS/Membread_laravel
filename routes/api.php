@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CourseInfoController;
+use App\Http\Controllers\EnrollmentCourseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LessonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('/course')->group(
     function()
     {
+        Route::get('/{id}',[CourseInfoController::class,'show']);
         Route::post('/store',[CourseInfoController::class,'store']);
         Route::put('/update',[CourseInfoController::class,'update']);
+        Route::post('/addlesson/{id}',[LessonController::class,'store']);
+        Route::post('/join/{id}',[EnrollmentCourseController::class,'joinCourse']);
     }
 );
