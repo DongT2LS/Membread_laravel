@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Jenssegers\Mongodb\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\SoftDeletes;
-use Jenssegers\Mongodb\Eloquent\HybridRelations;
 
-class LearningHistory extends Model
+class Comment extends Model
 {
-    use HasFactory,HybridRelations,SoftDeletes;
+    use HasFactory,SoftDeletes;
     protected $connection = 'mongodb';
-    protected $collection = 'learninghistories';
+    protected $collection = 'comments';
 
     protected $fillable = [
-        'learning_type',
-        'score',
-        'result'
+        'course_id',
+        'user_id',
+        'comment'
     ];
 
     public $timestamps = true;
