@@ -32,6 +32,10 @@ class EnrollmentCourseController extends Controller
 
         return Response(['message', 'Course not exist']);
     }
+    /**
+     *  restoreCourse 
+     *  change softDelete : true -> false
+     */
 
     public function restoreCourse($enrollmentcourse_id)
     {
@@ -61,6 +65,10 @@ class EnrollmentCourseController extends Controller
         
     }
 
+    public function getResult(Request $request)
+    {
+        
+    }
     public function setGoal($enrollmentcourse_id, Request $request)
     {
         if($enrollmentCourse = EnrollmentCourse::find($enrollmentcourse_id))
@@ -71,4 +79,6 @@ class EnrollmentCourseController extends Controller
         }
         return Response(['message'=>'Not found']);
     }
+
+    
 }

@@ -29,6 +29,11 @@ class Course extends Model
 
     public function lessons()
     {
-        return $this->embedsMany(Lesson::class,'lessons');
+        return $this->hasMany(Lesson::class);
+    }
+
+    public function addLessonId($id)
+    {
+        return $this->push('lessons',$id);
     }
 }

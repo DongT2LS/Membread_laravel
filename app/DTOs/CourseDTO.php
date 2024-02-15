@@ -29,6 +29,4 @@ class CourseDTO {
         $courseDTO->participants = $course->participants;
         return $courseDTO;
     }
-
-    // public 
 }

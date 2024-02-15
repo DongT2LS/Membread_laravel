@@ -8,11 +8,17 @@ use App\Models\Course;
 
 class LessonController extends Controller
 {
+    /**
+     * Done
+     */
     public function show($id)
     {
         $lesson = Lesson::find($id);
         return Response($lesson, 200);
     }
+    /**
+     * Done
+     */
     public function store($course_id, Request $request)
     {
         $lesson = new Lesson;
@@ -20,14 +26,15 @@ class LessonController extends Controller
         $lesson->description = $request->description;
         $lesson->elements = $request->elements;
         $lesson->type = $request->type;
-        $lesson->course_id = $course_id;
         $lesson->save();
 
         $course = Course::find($course_id);
-        $course->lessons()->associate($lesson);
+        $course->lessons()->save($lesson);
+        $course->addLessonId($lesson->id);
         $course->save();
         return Response(['message' => 'success'], 200);
     }
+
     public function update($lesson_id, Request $request)
     {
         $lesson = Lesson::find($lesson_id);
@@ -41,6 +48,9 @@ class LessonController extends Controller
 
         return Response(['message' => 'success'], 200);
     }
+    /**
+     * Done
+     */
     public function delete($lesson_id)
     {
         if ($lesson = Lesson::find($lesson_id)) {
